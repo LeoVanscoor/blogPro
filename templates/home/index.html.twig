@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <div class="navbar-menu d-flex justify-content-between w-100">
+                    <!-- All Buttons and Logo on the same line -->
+                    <a href="http://google.fr" class="navbar-button">Button 1</a>
+                    <a href="http://google.fr" class="navbar-button">Button 2</a>
+                    
+                    <!-- Logo Centered -->
+                    <a href="{{ path('app_home') }}" class="navbar-logo mx-3">
+                        <img src="{{ asset('images/logo2.png') }}" alt="Logo">
+                    </a>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/projet5/blogPro/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/projet5/blogPro/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+                    <a href="http://google.fr" class="navbar-button">Button 3</a>
+                    <a href="http://google.fr" class="navbar-button">Button 4</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 {% endblock %}

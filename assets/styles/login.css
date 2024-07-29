@@ -1,0 +1,47 @@
+
+/* Styles globaux pour le corps de la page */
+.login-page {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;     /* Centre verticalement */
+    height: 100vh;           /* Prend toute la hauteur de la fenêtre */
+    margin: 0;               /* Enlève les marges par défaut */
+    background-color: #f0f0f0; /* Couleur de fond de la page */
+}
+
+/* Conteneur du formulaire de connexion */
+.login-container {
+    max-width: 400px; /* Largeur maximale du conteneur */
+    width: 100%;      /* Largeur de 100% pour les petits écrans */
+    padding: 20px;   /* Espacement intérieur */
+    background-color: #fff; /* Couleur de fond du conteneur */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    box-sizing: border-box; /* Inclut les bordures et les marges dans la largeur */
+}
+
+.login-container h1 {
+    font-size: 1.5rem; /* Taille du titre */
+    margin-bottom: 20px; /* Espacement sous le titre */
+    text-align: center; /* Centre le titre */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espacement entre les champs du formulaire */
+}
+
+.form-control {
+    border-radius: 4px; /* Coins arrondis des champs */
+}
+
+.btn {
+    border-radius: 4px; /* Coins arrondis du bouton */
+}
+
+/* Assurez-vous que le bouton est centré horizontalement */
+.login-container .btn {
+    display: block;
+    width: 100%;
+    max-width: 200px; /* Ajustez la largeur maximale selon vos besoins */
+    margin: 0 auto; /* Centre horizontalement */
+}
