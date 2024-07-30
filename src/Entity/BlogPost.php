@@ -23,11 +23,12 @@ class BlogPost
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $contenu = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $author = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $lastUpdated = null;
+
+    #[ORM\ManyToOne(inversedBy: 'blogPosts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
 
     public function getId(): ?int
     {
@@ -70,18 +71,6 @@ class BlogPost
         return $this;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): static
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     public function getLastUpdated(): ?\DateTimeInterface
     {
         return $this->lastUpdated;
@@ -90,6 +79,18 @@ class BlogPost
     public function setLastUpdated(\DateTimeInterface $lastUpdated): static
     {
         $this->lastUpdated = $lastUpdated;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }
