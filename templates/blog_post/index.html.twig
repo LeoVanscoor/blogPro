@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogPostController!{% endblock %}
+{% block title %}BlogPost index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>BlogPost index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Chapo</th>
+                <th>Contenu</th>
+                <th>LastUpdated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for blog_post in blog_posts %}
+            <tr>
+                <td>{{ blog_post.id }}</td>
+                <td>{{ blog_post.titre }}</td>
+                <td>{{ blog_post.chapo }}</td>
+                <td>{{ blog_post.contenu }}</td>
+                <td>{{ blog_post.lastUpdated ? blog_post.lastUpdated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_blog_post_show', {'id': blog_post.id}) }}">show</a>
+                    <a href="{{ path('app_blog_post_edit', {'id': blog_post.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/projet5/blogPro/src/Controller/BlogPostController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/projet5/blogPro/templates/blog_post/index.html.twig</code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_blog_post_new') }}">Create new</a>
 {% endblock %}
