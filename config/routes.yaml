@@ -3,3 +3,68 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+app_blog_post_new:
+    path: /admin/blog/post/new
+    controller: App\Controller\BlogPostController::new
+    methods: [GET, POST]
+
+app_blog_post_edit:
+    path: /admin/blog/post/{id}/edit
+    controller: App\Controller\BlogPostController::edit
+    methods: [GET, POST]
+
+app_blog_post_delete:
+    path: /admin/blog/post/{id}
+    controller: App\Controller\BlogPostController::delete
+    methods: [POST]
+
+app_commentaire_index:
+    path: /admin/commentaire/
+    controller: App\Controller\CommentaireController::index
+    methods: [GET]
+
+app_user_index:
+    path: /admin/user
+    controller: App\Controller\UserController::index
+    methods: [GET]
+
+app_user_new:
+    path: /admin/user/new
+    controller: App\Controller\UserController::new
+    methods: [GET, POST]
+
+app_user_edit:
+    path: /admin/user/{id}/edit
+    controller: App\Controller\UserController::edit
+    methods: [GET, POST]
+
+app_user_delete:
+    path: /admin/user/{id}/delete
+    controller: App\Controller\UserController::delete
+    methods: [POST]
+
+app_commentaire_new:
+    path: /admin/commentaire/new
+    controller: App\Controller\CommentaireController::new
+    methods: [GET, POST]
+
+app_commentaire_show:
+    path: /admin/commentaire/{id}
+    controller: App\Controller\CommentaireController::show
+    methods: [GET]
+
+app_commentaire_edit:
+    path: /admin/commentaire/{id}/edit
+    controller: App\Controller\CommentaireController::edit
+    methods: [GET, POST]
+
+app_commentaire_delete:
+    path: /admin/commentaire/{id}/delete
+    controller: App\Controller\CommentaireController::delete
+    methods: [POST]
+
+app_commentaire_validate:
+    path: /admin/commentaire/{id}/validate
+    controller: App\Controller\CommentaireController::validate
+    methods: [POST]

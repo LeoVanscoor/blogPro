@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\BlogPost;
+use App\Entity\Commentaire;
 use App\Form\BlogPost1Type;
+use App\Form\CommentaireType;
 use App\Repository\BlogPostRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,8 +26,8 @@ class BlogPostController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_blog_post_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('blog/post/new', name: 'app_blog_post_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $blogPost = new BlogPost();
         $form = $this->createForm(BlogPost1Type::class, $blogPost);
@@ -32,6 +35,7 @@ class BlogPostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $blogPost->setLastUpdated(new DateTime());
+            $blogPost->setAuthor($security->getUser());
             $entityManager->persist($blogPost);
             $entityManager->flush();
 
@@ -44,11 +48,27 @@ class BlogPostController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_blog_post_show', methods: ['GET'])]
-    public function show(BlogPost $blogPost): Response
+    #[Route('/{id}', name: 'app_blog_post_show')]
+    public function show(BlogPost $blogPost, Request $request, EntityManagerInterface $em): Response
     {
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commentaire->setBlogpost($blogPost);
+            $commentaire->setDateCreation(new \DateTime());
+            $commentaire->setAuthor($this->getUser());
+
+            $em->persist($commentaire);
+            $em->flush();
+
+            return $this->redirectToRoute('app_blog_post_show', ['id' => $blogPost->getId()]);
+        }
+
         return $this->render('blog_post/show.html.twig', [
             'blog_post' => $blogPost,
+            'commentForm' => $form->createView(),
         ]);
     }
 
@@ -74,7 +94,7 @@ class BlogPostController extends AbstractController
     #[Route('/{id}', name: 'app_blog_post_delete', methods: ['POST'])]
     public function delete(Request $request, BlogPost $blogPost, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$blogPost->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $blogPost->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($blogPost);
             $entityManager->flush();
         }

@@ -79,4 +79,15 @@ class CommentaireController extends AbstractController
 
         return $this->redirectToRoute('app_commentaire_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/validate', name: 'app_commentaire_validate', methods: ['POST'])]
+    public function validate(Commentaire $commentaire, EntityManagerInterface $em): Response
+    {
+        $commentaire->setValidation(true); // Assurez-vous que la méthode `setValidated` existe dans votre entité
+        $em->flush();
+
+        $this->addFlash('success', 'Commentaire validé avec succès.');
+
+        return $this->redirectToRoute('app_admin');
+    }
 }

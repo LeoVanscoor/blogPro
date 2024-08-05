@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}BlogPost{% endblock %}
-
+{% block title %}BlogPost
+{% endblock %}
+{#
 {% block body %}
     <h1>BlogPost</h1>
 
@@ -35,4 +36,55 @@
     <a href="{{ path('app_blog_post_edit', {'id': blog_post.id}) }}">edit</a>
 
     {{ include('blog_post/_delete_form.html.twig') }}
+{% endblock %}
+#}
+
+{% block body %}
+	<div class="container mt-4">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">{{ blog_post.titre }}</h5>
+						<p class="card-text">{{ blog_post.chapo }}</p>
+						<p class="card-text">{{ blog_post.contenu }}</p>
+						<p class="card-text">
+							<small class="text-muted">Last updated:
+								{{ blog_post.lastUpdated|date('F j, Y, g:i a') }}</small>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-8 mt-4">
+				<h6>Add a Comment:</h6>
+				{{ form_start(commentForm) }}
+				{{ form_row(commentForm.contenu) }}
+				<button type="submit" class="btn btn-primary">Submit</button>
+				{{ form_end(commentForm) }}
+			</div>
+
+			<div class="col-md-8 mt-4">
+				<h6>Comments:</h6>
+				{% set validCommentaires = blog_post.commentaires|filter(comment => comment.validation) %}
+				{% if validCommentaires|length > 0 %}
+					<ul class="list-group">
+						{% for commentaire in validCommentaires %}
+							<li class="list-group-item">
+								<p>{{ commentaire.contenu }}</p>
+								<small class="text-muted">
+									Posted by
+									{{ commentaire.author.email }}
+									on
+									{{ commentaire.dateCreation|date('F j, Y, g:i a') }}
+								</small>
+							</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<p>No comments yet.</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 {% endblock %}
