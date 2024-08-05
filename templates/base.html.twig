@@ -1,19 +1,82 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-        
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
 
-        
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block stylesheets %}{% endblock %}
+
+
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container">
+					<div
+						class="navbar-menu d-flex justify-content-between w-100">
+						<!-- All Buttons and Logo on the same line -->
+						<a href="{{ path('app_blog_post_index') }}" class="navbar-button">Articles</a>
+
+						<!-- Logo Centered -->
+						<a href="{{ path('app_home') }}" class="navbar-logo mx-3">
+							<img src="{{ asset('images/logo2.png') }}" alt="Logo">
+						</a>
+
+						<a href="http://google.fr" class="navbar-button">profil</a>
+					</div>
+				</div>
+			</nav>
+		</header>
+		{% block body %}{% endblock %}
+		<footer class="bg-dark text-light py-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<h5>Informations</h5>
+						<ul class="list-unstyled">
+							<li>
+								<a href="{{ path('app_blog_post_index') }}" class="text-light">Liste des Articles</a>
+							</li>
+							<li>
+								<a href="http://google.fr" class="text-light">À propos</a>
+							</li>
+							<li>
+								<a href="http://google.fr" class="text-light">Politique de confidentialité</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4 text-center">
+						<h5>Suivez-nous</h5>
+						<a href="https://twitter.com" class="text-light me-2">
+							<i class="fab fa-twitter"></i>
+							Twitter</a><br>
+						<a href="https://facebook.com" class="text-light me-2">
+							<i class="fab fa-facebook-f"></i>
+							Facebook</a><br>
+						<a href="https://instagram.com" class="text-light">
+							<i class="fab fa-instagram"></i>
+							Instagram</a>
+					</div>
+					<div class="col-md-4 text-end">
+						<h5>Administration</h5>
+						<a href="{{ path('app_admin') }}" class="btn btn-primary">Accéder à l'Administration</a>
+					</div>
+				</div>
+				<div class="text-center mt-3">
+					<p>&copy;
+						{{ "now"|date("Y") }}
+						MonSite. Tous droits réservés.</p>
+				</div>
+			</div>
+		</footer>
+	</body>
 </html>

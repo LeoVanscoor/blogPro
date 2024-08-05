@@ -21,7 +21,6 @@ body {
 .btn-primary {
     background-color: #007bff;
     border: none;
-    padding: 10px 20px;
 }
 
 .btn-primary:hover {
@@ -91,4 +90,17 @@ body {
 
 main {
     padding: 20px; /* Espacement pour le contenu principal */
+}
+.card-custom-shadow {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Ombre déportée à droite et en bas */
+}
+
+.text-right {
+    text-align: right !important; /* Aligne le texte à droite */
+}
+
+.card-title a,
+.author-link {
+    text-decoration: none;
+    color: inherit;
 }

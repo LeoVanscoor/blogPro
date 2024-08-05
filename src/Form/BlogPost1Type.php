@@ -20,10 +20,10 @@ class BlogPost1Type extends AbstractType
             //->add('lastUpdated', null, [
             //    'widget' => 'single_text',
             //])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+            //->add('author', EntityType::class, [
+            //    'class' => User::class,
+            //    'choice_label' => 'id',
+            //])
         ;
     }
 

@@ -19,14 +19,14 @@ class CommentaireType extends AbstractType
             //->add('dateCreation', null, [
             //    'widget' => 'single_text',
             //])
-            ->add('blogpost', EntityType::class, [
-                'class' => BlogPost::class,
-                'choice_label' => 'id',
-            ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+            //->add('blogpost', EntityType::class, [
+            //    'class' => BlogPost::class,
+            //    'choice_label' => 'id',
+            //])
+            //->add('author', EntityType::class, [
+            //    'class' => User::class,
+            //    'choice_label' => 'id',
+            //])
         ;
     }
 
