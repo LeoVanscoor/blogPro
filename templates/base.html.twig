@@ -7,6 +7,7 @@
 			{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 		{% block javascripts %}
 			{% block importmap %}
 				{{ importmap('app') }}
@@ -19,64 +20,88 @@
 	</head>
 	<body>
 		<header>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container">
+			{% if app.request.pathinfo != path('app_login') %}
+				<nav id="navmenu" class="navbar navbar-expand-lg navbar-light navmenu">
 					<div
-						class="navbar-menu d-flex justify-content-between w-100">
-						<!-- All Buttons and Logo on the same line -->
-						<a href="{{ path('app_blog_post_index') }}" class="navbar-button">Articles</a>
-
-						<!-- Logo Centered -->
-						<a href="{{ path('app_home') }}" class="navbar-logo mx-3">
-							<img src="{{ asset('images/logo2.png') }}" alt="Logo">
+						class="container d-flex justify-content-between align-items-center">
+						<!-- Logo à gauche -->
+						<a href="{{ path('app_home') }}" class="navbar-brand">
+							<img src="{{ asset('images/logobleu.png') }}" alt="Logo" style="height: 100px;">
 						</a>
 
-						<a href="http://google.fr" class="navbar-button">profil</a>
+						<!-- Boutons à droite -->
+						<div class="d-flex">
+							<ul
+								class="navbar-nav d-flex align-items-center">
+								<!-- Bouton Articles -->
+								<li class="nav-item">
+									<a href="{{ path('app_blog_post_index') }}" class="nav-link">Articles</a>
+								</li>
+
+								<!-- Bouton Profil -->
+								<li class="nav-item">
+									<a href="http://google.fr" class="nav-link">Profil</a>
+								</li>
+
+								{% if app.request.pathinfo == path('app_home') %}
+								<li class="nav-item">
+									<a href="#contact" class="nav-link">Contact</a>
+								</li>
+								<li class="nav-item">
+									<a href="#cv" class="nav-link">Télécharger CV</a>
+								</li>
+								<li class="nav-item">
+									<a href="#connecter" class="nav-link">Rester Connectés</a>
+								</li>
+								{% endif %}
+
+								<!-- Bouton Se Déconnecter -->
+								<li class="nav-item">
+									<a href="{{ path('app_logout') }}" class="nav-link">Se Déconnecter</a>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-			</nav>
+				</nav>
+			{% endif %}
 		</header>
 		{% block body %}{% endblock %}
-		<footer class="bg-dark text-light py-4">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<h5>Informations</h5>
-						<ul class="list-unstyled">
-							<li>
-								<a href="{{ path('app_blog_post_index') }}" class="text-light">Liste des Articles</a>
-							</li>
-							<li>
-								<a href="http://google.fr" class="text-light">À propos</a>
-							</li>
-							<li>
-								<a href="http://google.fr" class="text-light">Politique de confidentialité</a>
-							</li>
-						</ul>
+		{% if app.request.pathinfo != path('app_login') %}
+			<footer class="footer custom-footer py-4" style="border-top: 1px solid #e0e0e0; padding-top: 10px;">
+				<div class="container">
+					<div
+						class="row">
+						<!-- Informations -->
+						<div class="col-md-6">
+							<h4 class="footer-title">Informations</h4>
+							<ul class="list-unstyled footer-links">
+								<li>
+									<a href="{{ path('app_blog_post_index') }}" class="footer-link">Liste des Articles</a>
+								</li>
+								<li>
+									<a href="http://google.fr" class="footer-link">À propos</a>
+								</li>
+								<li>
+									<a href="http://google.fr" class="footer-link">Politique de confidentialité</a>
+								</li>
+							</ul>
+						</div>
+
+						<!-- Administration -->
+						<div class="col-md-6 text-end">
+							<h4 class="footer-title">Administration</h4>
+							<a href="{{ path('app_admin') }}" class="btn btn-primary">Accéder à l'Administration</a>
+						</div>
 					</div>
-					<div class="col-md-4 text-center">
-						<h5>Suivez-nous</h5>
-						<a href="https://twitter.com" class="text-light me-2">
-							<i class="fab fa-twitter"></i>
-							Twitter</a><br>
-						<a href="https://facebook.com" class="text-light me-2">
-							<i class="fab fa-facebook-f"></i>
-							Facebook</a><br>
-						<a href="https://instagram.com" class="text-light">
-							<i class="fab fa-instagram"></i>
-							Instagram</a>
-					</div>
-					<div class="col-md-4 text-end">
-						<h5>Administration</h5>
-						<a href="{{ path('app_admin') }}" class="btn btn-primary">Accéder à l'Administration</a>
+
+					<!-- Copyright -->
+					<div class="text-center mt-3 footer-copyright">
+						<p>&copy;
+							{{ "now"|date("Y") }}
+							Vanscoor Léo. Tous droits réservés.</p>
 					</div>
 				</div>
-				<div class="text-center mt-3">
-					<p>&copy;
-						{{ "now"|date("Y") }}
-						MonSite. Tous droits réservés.</p>
-				</div>
-			</div>
-		</footer>
+			</footer>
+		{% endif %}
 	</body>
 </html>
