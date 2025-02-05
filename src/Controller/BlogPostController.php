@@ -82,7 +82,7 @@ class BlogPostController extends AbstractController
             $blogPost->setLastUpdated(new DateTime());
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_blog_post_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('blog_post/edit.html.twig', [
@@ -94,11 +94,11 @@ class BlogPostController extends AbstractController
     #[Route('/{id}', name: 'app_blog_post_delete', methods: ['POST'])]
     public function delete(Request $request, BlogPost $blogPost, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $blogPost->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $blogPost->getId(), $request->get('_token'))) {
             $entityManager->remove($blogPost);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_blog_post_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
     }
 }
