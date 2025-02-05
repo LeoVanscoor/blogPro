@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Administration</h1>
+	<h1 style="text-align: center;">Administration</h1>
 
 	<div
 		class="container">
@@ -35,7 +35,6 @@
 							<a href="{{ path('app_blog_post_edit', {'id': post.id}) }}" class="btn btn-warning btn-sm">Éditer</a>
 							<form action="{{ path('app_blog_post_delete', {'id': post.id}) }}" method="post" style="display:inline;">
 								<button type="submit" class="btn btn-danger btn-sm">Supprimer l'article</button>
-								<input type>
 							</form>
 						</td>
 					</tr>

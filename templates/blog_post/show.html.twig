@@ -57,15 +57,20 @@
 			</div>
 
 			<div class="col-md-8 mt-4">
-				<h6>Add a Comment:</h6>
+				<h6>Ajouter un commentaire :</h6>
 				{{ form_start(commentForm) }}
-				{{ form_row(commentForm.contenu) }}
-				<button type="submit" class="btn btn-primary">Submit</button>
+				{{ form_widget(commentForm.contenu, {'attr': {'class': 'form-control', 'placeholder': 'Écrivez votre commentaire...'}}) }}
+
+				<!-- Bouton en dessous -->
+				<div class="mt-3">
+					<button type="submit" class="btn btn-primary">Publier le commentaire</button>
+				</div>
+
 				{{ form_end(commentForm) }}
 			</div>
 
 			<div class="col-md-8 mt-4">
-				<h6>Comments:</h6>
+				<h6>Commentaires:</h6>
 				{% set validCommentaires = blog_post.commentaires|filter(comment => comment.validation) %}
 				{% if validCommentaires|length > 0 %}
 					<ul class="list-group">
