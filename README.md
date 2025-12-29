@@ -21,17 +21,19 @@ Un **blog personnel simple** développé avec **Symfony**, incluant un **CRUD d�
 composer install
 ```
 
-2. Créer la base de données :
+2.Configurer .env
+
+3. Créer la base de données :
 ```bash
 php bin/console doctrine:database:create
 ```
 
-3. Exécuter les migrations :
+4. Exécuter les migrations :
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
 
-4. Donner le rôle admin
+5. Donner le rôle admin
 
 - Les utilisateurs créés via le formulaire ont par défaut ROLE_USER
 
