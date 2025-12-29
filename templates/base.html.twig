@@ -29,21 +29,15 @@
 							<img src="{{ asset('images/logobleu.png') }}" alt="Logo" style="height: 100px;">
 						</a>
 
-						<!-- Boutons à droite -->
-						<div class="d-flex">
-							<ul
-								class="navbar-nav d-flex align-items-center">
-								<!-- Bouton Articles -->
-								<li class="nav-item">
-									<a href="{{ path('app_blog_post_index') }}" class="nav-link">Articles</a>
-								</li>
+						<!-- Menu de navigation -->
+						<ul
+							class="navbar-nav d-flex align-items-center">
+							<!-- Bouton Articles -->
+							<li class="nav-item">
+								<a href="{{ path('app_blog_post_index') }}" class="nav-link">Articles</a>
+							</li>
 
-								<!-- Bouton Profil -->
-								<li class="nav-item">
-									<a href="http://google.fr" class="nav-link">Profil</a>
-								</li>
-
-								{% if app.request.pathinfo == path('app_home') %}
+							{% if app.request.pathinfo == path('app_home') %}
 								<li class="nav-item">
 									<a href="#contact" class="nav-link">Contact</a>
 								</li>
@@ -53,14 +47,13 @@
 								<li class="nav-item">
 									<a href="#connecter" class="nav-link">Rester Connectés</a>
 								</li>
-								{% endif %}
+							{% endif %}
 
-								<!-- Bouton Se Déconnecter -->
-								<li class="nav-item">
-									<a href="{{ path('app_logout') }}" class="nav-link">Se Déconnecter</a>
-								</li>
-							</ul>
-						</div>
+							<!-- Bouton Se Déconnecter -->
+							<li class="nav-item">
+								<a href="{{ path('app_logout') }}" class="nav-link">Se Déconnecter</a>
+							</li>
+						</ul>
 					</div>
 				</nav>
 			{% endif %}

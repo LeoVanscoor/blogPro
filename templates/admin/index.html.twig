@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Administration</h1>
+	<h1 style="text-align: center;">Administration</h1>
 
 	<div
 		class="container">
@@ -33,9 +33,11 @@
 						<td>
 							<a href="{{ path('app_blog_post_show', {'id': post.id}) }}" class="btn btn-primary btn-sm">Afficher</a>
 							<a href="{{ path('app_blog_post_edit', {'id': post.id}) }}" class="btn btn-warning btn-sm">Éditer</a>
-							<form action="{{ path('app_blog_post_delete', {'id': post.id}) }}" method="post" style="display:inline;">
+							<form
+								action="{{ path('app_blog_post_delete', {'id': post.id}) }}" method="post" style="display:inline;">
+								<!-- Token CSRF -->
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
 								<button type="submit" class="btn btn-danger btn-sm">Supprimer l'article</button>
-								<input type>
 							</form>
 						</td>
 					</tr>
@@ -74,6 +76,7 @@
 								<button type="submit" class="btn btn-warning btn-sm">Éditer</button>
 							</form>
 							<form action="{{ path('app_commentaire_delete', {'id': commentaire.id}) }}" method="post" style="display:inline;">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commentaire.id) }}">
 								<button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
 							</form>
 							{% if not commentaire.isValidation %}
